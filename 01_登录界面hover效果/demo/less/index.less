@@ -1,0 +1,161 @@
+* {
+    // 去除诸如h1~h5、ulli等元素的margin和padding默认值
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    // flex布局
+    // 让body中元素垂直水平居中
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // vh = 1/100视口高度
+    height: 100vh;
+    background-color: #1d1928;
+}
+
+.container {
+    display: flex;
+    // 让标题和表单垂直排列
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 450px;
+    background-color: #4471a3;
+    // 增加盒子圆角
+    border-radius: 20px;
+    // 增加盒子阴影
+    box-shadow: 15px 15px 10px rgba(33, 45, 58, 0.3);
+    // 内部盒子的溢出隐藏
+    overflow: hidden;
+    // 因为span盒子需绝对定位
+    position: relative;
+
+    h1 {
+        color: #ecf0f1;
+        font-size: 50px;
+        letter-spacing: 5px;
+        font-weight: 100;
+        // 文字阴影
+        text-shadow: 5px 5px 5px rgba(33, 45, 58, 0.3);
+        // 当span盒子铺开时，不致被覆盖
+        z-index: 1;
+    }
+
+    form {
+        display: flex;
+        // 让输入框和登录按钮水品居中，垂直方向均匀排列
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 350px;
+        height: 200px;
+        // 当span盒子铺开时，不致被覆盖
+        z-index: 1;
+
+        .ipt {
+            width: 250px;
+            height: 40px;
+            // 去除输入框底色
+            background: none;
+            /* 
+                去除outline
+                outline 不占据空间，绘制于元素内容周围
+                对于很多元素来说，如果没有设置样式，轮廓是不可见的。
+                因为样式（style）的默认值是 none。
+                但 input 元素是例外，其样式默认值由浏览器决定
+                所以我们将其去除
+            */
+            outline: none;
+            // 去除输入框边框
+            border: none;
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            font-size: 15px;
+
+            &::placeholder {
+                color: #fff;
+                font-size: 15px;
+            }
+        }
+
+        .sub {
+            width: 250px;
+            height: 40px;
+            outline: none;
+            border-radius: 20px;
+            border: 1px solid #fff;
+            color: #fff;
+            background: none;
+            // 设置字符间间距
+            letter-spacing: 5px;
+            // 将箭头样式设为手型
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    }
+
+    // 鼠标进入时样式
+    .in {
+        position: absolute;
+        // top、left设0，盒子设置成圆形(border-radius: 50%)
+        // translate向左、向上移动自身50%，达到从左上角铺开的效果
+        top: 0;
+        left: 0;
+        display: block;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: #cf455f;
+        transform: translate(-50%, -50%);
+        // 动画持续0.5s、动画最后慢速、停留在最后一帧
+        animation: in 0.5s ease-out forwards;
+    }
+
+    // 鼠标离开样式
+    .out {
+        position: absolute;
+        // top、left设0，盒子设置成圆形(border-radius: 50%)
+        // translate向左、向上移动自身50%，达到从左上角铺开的效果
+        top: 0;
+        left: 0;
+        display: block;
+        width: 1200px;
+        height: 1200px;
+        border-radius: 50%;
+        background: #cf455f;
+        transform: translate(-50%, -50%);
+        // 动画持续0.5s、动画最后慢速、停留在最后一帧
+        animation: out 0.5s ease-out forwards;
+    }
+
+}
+
+/* 动画 */
+// 鼠标进入时动画
+@keyframes in {
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    100% {
+        width: 1200px;
+        height: 1200px;
+    }
+}
+
+// 鼠标离开时动画
+@keyframes out {
+    0% {
+        width: 1200px;
+        height: 1200px;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
